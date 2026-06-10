@@ -1,4 +1,4 @@
-local Card = require("core.card")
+local Card = require("ui.card")
 local Deck = {
     cards = {},
     drawResult = nil
@@ -16,12 +16,6 @@ function Deck:drawCard()
     local n = math.random(1, #self.cards)
     self.drawResult = n
     print("Deck draw out card", self.cards[n].name)
-end
-
-function Deck:getCard()
-    if not self.drawResult then
-        return nil
-    end
     return self.cards[self.drawResult]
 end
 

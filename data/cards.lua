@@ -13,7 +13,7 @@ local cards = {
         id = 99,
         name = "test name",
         message = "test message",
-        imagePath = "assets/images/test.png"
+        imagePath = "assets/images/card.png"
     }
 }
 return cards

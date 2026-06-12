@@ -7,28 +7,31 @@ local Scene = {
     startButton = Button("start", 10, 110, 30, 30)
 }
 
-function Scene:load()
+function Scene:init()
+end
+
+function Scene:enter(previous)
 end
 
 function Scene:update(dt)
     self.startButton:update(dt)
 end
 
-function Scene:draw(card)
+function Scene:draw()
     self.welcomeText:draw()
     self.usageText:draw()
     self.startButton:draw()
 end
 
-function Scene:keypressed(key, sceneManger)
+function Scene:keypressed(key)
     if key == "space" then
-        sceneManger:changeScene("draw")
+        Gamestate.switch(DrawScene)
     end
 end
 
-function Scene:mousepressed(x, y, button, sceneManger)
+function Scene:mousepressed(x, y, button)
     if button == 1 and self.startButton:isPressed(x, y) then
-        sceneManger:changeScene("draw")
+        Gamestate.switch(DrawScene)
     end
 end
 

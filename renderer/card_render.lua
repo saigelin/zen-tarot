@@ -5,6 +5,7 @@ function Render:draw(uiCard, card)
         return
     end
     local y = uiCard.y
+    love.graphics.setFont(card.font)
     if card.image == nil then
         love.graphics.print(card.name, uiCard.x, y)
         y = y + 10

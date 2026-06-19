@@ -1,3 +1,4 @@
+local Background = require("ui.background")
 local Card = require("ui.card")
 local Button = require("ui.button")
 local cardData = require("data.cards")
@@ -11,15 +12,17 @@ local sceneState = {
 }
 local Scene = {
     cardBack = Card(0, "card back", "card back msg", nil),
-    drawButton = Button("draw", 60, 110, 30, 30),
-    frames = {}
+    drawButton = Button("draw", 60, 110, 30, 30)
 }
 
 function Scene:init()
     Deck:load(cardData)
 
+    self.background = Background("assets/images/background.jpg")
+
     self.timer = Timer.new()
 
+    self.frames = {}
     self.image = love.graphics.newImage("assets/images/reveal.png")
     local width = self.image:getWidth()
     local height = self.image:getHeight()
@@ -41,6 +44,8 @@ function Scene:init()
 end
 
 function Scene:enter(previous)
+    self.drawButton:toNormal()
+    AudioMgr:playBGM()
     self:toIdle()
 end
 
@@ -50,6 +55,7 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
+    self.background:draw()
     if self.state == sceneState.IDLE then
         self.cardBack:draw()
         self.drawButton:draw()
@@ -72,7 +78,7 @@ function Scene:toAnimating()
         self:nextFrame()
     end, 4)
     self.timer:after(0.15 * 5, function()
-        Gamestate.switch(ResultScene, Deck:drawCard())
+        Gamestate.switch(ResultScene, self.currentCard)
     end)
 end
 
@@ -88,19 +94,26 @@ function Scene:startReveal()
         return
     end
 
+    self.currentCard = Deck:drawCard()
     self:toAnimating()
 end
 
 function Scene:keypressed(key)
     if key == "space" then
+        AudioMgr:playSE()
         self:startReveal()
     end
 end
 
 function Scene:mousepressed(x, y, button)
-    if button == 1 and self.drawButton:isPressed(x, y) then
+    if button == 1 and self.drawButton:inArea(x, y) then
+        AudioMgr:playSE()
         self:startReveal()
     end
+end
+
+function Scene:mousemoved(x, y)
+    self.drawButton:mousemoved(x, y)
 end
 
 return Scene

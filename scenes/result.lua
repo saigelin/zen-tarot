@@ -1,3 +1,4 @@
+local Background = require("ui.background")
 local Button = require("ui.button")
 
 local Scene = {
@@ -5,10 +6,13 @@ local Scene = {
 }
 
 function Scene:init()
+    self.background = Background("assets/images/background.jpg")
 end
 
 function Scene:enter(previous, currentCard)
     self.currentCard = currentCard
+    self.againButton:toNormal()
+    AudioMgr:playBGM()
 end
 
 function Scene:update(dt)
@@ -16,6 +20,7 @@ function Scene:update(dt)
 end
 
 function Scene:draw()
+    self.background:draw()
     if self.currentCard then
         self.currentCard:draw()
     end
@@ -24,14 +29,20 @@ end
 
 function Scene:keypressed(key)
     if key == "space" then
+        AudioMgr:playSE()
         Gamestate.switch(DrawScene)
     end
 end
 
 function Scene:mousepressed(x, y, button)
-    if button == 1 and self.againButton:isPressed(x, y) then
+    if button == 1 and self.againButton:inArea(x, y) then
+        AudioMgr:playSE()
         Gamestate.switch(DrawScene)
     end
+end
+
+function Scene:mousemoved(x, y)
+    self.againButton:mousemoved(x, y)
 end
 
 return Scene

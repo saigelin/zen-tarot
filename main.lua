@@ -1,24 +1,13 @@
+Font = require("core.font")
 Gamestate = require("libs.hump.gamestate")
 TitleScene = require("scenes.title")
 DrawScene = require("scenes.draw")
 ResultScene = require("scenes.result")
+AudioMgr = require("systems.audio_manager")
 
 function love.load()
     math.randomseed(os.time())
+    AudioMgr:load()
     Gamestate.registerEvents()
     Gamestate.switch(TitleScene)
-end
-
-function love.update(dt)
-end
-
-function love.draw()
-end
-
-function love.keypressed(key)
-    print("key pressed", key)
-end
-
-function love.mousepressed(x, y, button)
-    print("mouse pressed", x, y, button)
 end

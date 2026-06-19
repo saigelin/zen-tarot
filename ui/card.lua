@@ -12,6 +12,7 @@ function Card:new(id, name, message, imagePath)
     else
         self.image = nil
     end
+    self.font = Font.default
 end
 
 function Card:update(dt)

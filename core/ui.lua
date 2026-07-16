@@ -1,7 +1,9 @@
 local UI = {
     cardLayout = {
-        x = 10,
-        y = 10
+        x = 90,
+        y = 10,
+        w = 256,
+        h = 512
     }
 }
 

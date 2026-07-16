@@ -2,11 +2,11 @@ local Background = require("ui.background")
 local Button = require("ui.button")
 
 local Scene = {
-    againButton = Button("again", 110, 110, 30, 30)
+    againButton = Button("again", 10, 210, 30, 30)
 }
 
 function Scene:init()
-    self.background = Background("assets/images/background.jpg")
+    self.background = Background("assets/images/background.png")
 end
 
 function Scene:enter(previous, currentCard)

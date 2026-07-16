@@ -9,7 +9,7 @@ local Scene = {
 }
 
 function Scene:init()
-    self.background = Background("assets/images/background.jpg")
+    self.background = Background("assets/images/background.png")
 end
 
 function Scene:enter(previous)

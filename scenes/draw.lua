@@ -2,7 +2,7 @@ local Background = require("ui.background")
 local Card = require("ui.card")
 local Button = require("ui.button")
 local cardData = require("data.cards")
-local Deck = require("core.deck")
+local CardMgr = require("systems.card_manager")
 local Timer = require("libs.hump.timer")
 local UI = require("core.ui")
 
@@ -10,15 +10,22 @@ local sceneState = {
     IDLE = 0,
     ANIMATING = 1
 }
+local cardBackData = {
+    id = -1,
+    name = "card back",
+    message = "",
+    description = "",
+    imagePath = "assets/images/back.png"
+}
 local Scene = {
-    cardBack = Card(0, "card back", "card back msg", nil),
-    drawButton = Button("draw", 60, 110, 30, 30)
+    cardBack = Card(cardBackData),
+    drawButton = Button("draw", 10, 160, 30, 30)
 }
 
 function Scene:init()
-    Deck:load(cardData)
+    CardMgr:load(cardData)
 
-    self.background = Background("assets/images/background.jpg")
+    self.background = Background("assets/images/background.png")
 
     self.timer = Timer.new()
 
@@ -26,17 +33,15 @@ function Scene:init()
     self.image = love.graphics.newImage("assets/images/reveal.png")
     local width = self.image:getWidth()
     local height = self.image:getHeight()
-    local frame_width = 117
-    local frame_height = 233
+    local frame_width = 256
+    local frame_height = 512
     local maxFrames = 5
-    for i = 0, 1 do
-        for j = 0, 2 do
-            table.insert(self.frames,
-                love.graphics.newQuad(1 + j * (frame_width + 2), 1 + i * (frame_height + 2), frame_width, frame_height,
-                    width, height))
-            if #self.frames == maxFrames then
-                break
-            end
+    for j = 0, 5 do
+        table.insert(self.frames,
+            love.graphics.newQuad(33 + j * (frame_width + 44), 278, frame_width, frame_height,
+                width, height))
+        if #self.frames == maxFrames then
+            break
         end
     end
 
@@ -94,7 +99,7 @@ function Scene:startReveal()
         return
     end
 
-    self.currentCard = Deck:drawCard()
+    self.currentCard = CardMgr:drawCard()
     self:toAnimating()
 end
 

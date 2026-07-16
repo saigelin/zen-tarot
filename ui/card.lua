@@ -3,12 +3,13 @@ local Render = require("renderer.card_render")
 local Object = require("libs.classic")
 local Card = Object:extend()
 
-function Card:new(id, name, message, imagePath)
-    self.id = id
-    self.name = name
-    self.message = message
-    if imagePath then
-        self.image = love.graphics.newImage(imagePath)
+function Card:new(data)
+    self.id = data.id
+    self.name = data.name
+    self.message = data.message
+    self.description = data.description
+    if data.imagePath then
+        self.image = love.graphics.newImage(data.imagePath)
     else
         self.image = nil
     end

@@ -3,7 +3,7 @@ local Render = require("renderer.card_render")
 local Object = require("libs.classic")
 local Card = Object:extend()
 
-function Card:new(data)
+function Card:new(data, textColor)
     self.id = data.id
     self.name = data.name
     self.message = data.message
@@ -14,6 +14,7 @@ function Card:new(data)
         self.image = nil
     end
     self.font = Font.default
+    self.textColor = textColor
 end
 
 function Card:update(dt)

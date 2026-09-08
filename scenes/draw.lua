@@ -5,6 +5,7 @@ local cardData = require("data.cards")
 local CardMgr = require("systems.card_manager")
 local Timer = require("libs.hump.timer")
 local UI = require("core.ui")
+local Theme = require("core.theme")
 
 local sceneState = {
     IDLE = 0,
@@ -15,22 +16,22 @@ local cardBackData = {
     name = "card back",
     message = "",
     description = "",
-    imagePath = "assets/images/back.png"
+    imagePath = Theme.cardBackImage
 }
 local Scene = {
-    cardBack = Card(cardBackData),
-    drawButton = Button("draw", 10, 160, 30, 30)
+    cardBack = Card(cardBackData, Theme.textColor),
+    drawButton = Button("draw", 10, 160, 30, 30, Theme.buttonColor, Theme.buttonHoverColor, Theme.buttonBorderColor, Theme.buttonTextColor)
 }
 
 function Scene:init()
-    CardMgr:load(cardData)
+    CardMgr:load(cardData, Theme.textColor)
 
-    self.background = Background("assets/images/background.png")
+    self.background = Background(Theme.backgroundImage)
 
     self.timer = Timer.new()
 
     self.frames = {}
-    self.image = love.graphics.newImage("assets/images/reveal.png")
+    self.image = love.graphics.newImage(Theme.revealImage)
     local width = self.image:getWidth()
     local height = self.image:getHeight()
     local frame_width = 256

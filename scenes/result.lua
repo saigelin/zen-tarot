@@ -1,12 +1,13 @@
 local Background = require("ui.background")
 local Button = require("ui.button")
+local Theme = require("core.theme")
 
 local Scene = {
-    againButton = Button("again", 10, 210, 30, 30)
+    againButton = Button("again", 10, 210, 30, 30, Theme.buttonColor, Theme.buttonHoverColor, Theme.buttonBorderColor, Theme.buttonTextColor)
 }
 
 function Scene:init()
-    self.background = Background("assets/images/background.png")
+    self.background = Background(Theme.backgroundImage)
 end
 
 function Scene:enter(previous, currentCard)

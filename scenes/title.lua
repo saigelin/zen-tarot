@@ -1,15 +1,16 @@
 local Background = require("ui.background")
 local Text = require("ui.text")
 local Button = require("ui.button")
+local Theme = require("core.theme")
 
 local Scene = {
-    welcomeText = Text("Welcome to Meditation World", 10, 10, "title"),
-    usageText = Text("Please Press 'space' or Click Button to Meditate by Card", 10, 60),
-    startButton = Button("start", 10, 110, 30, 30)
+    welcomeText = Text("Welcome to Meditation World", 10, 10, "title", Theme.textColor),
+    usageText = Text("Please Press 'space' or Click Button to Meditate by Card", 10, 60, "text", Theme.textColor),
+    startButton = Button("start", 10, 110, 30, 30, Theme.buttonColor, Theme.buttonHoverColor, Theme.buttonBorderColor, Theme.buttonTextColor)
 }
 
 function Scene:init()
-    self.background = Background("assets/images/background.png")
+    self.background = Background(Theme.backgroundImage)
 end
 
 function Scene:enter(previous)

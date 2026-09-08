@@ -2,28 +2,27 @@ local Render = require("renderer.button_render")
 local Object = require("libs.classic")
 local Button = Object:extend()
 
-local color = {
-    normal = { r = 0.5, g = 0.5, b = 0.5 },
-    hover = { r = 0.75, g = 0.75, b = 0.75 }
-}
-
 function Button:toNormal()
     self.isHovered = false
-    self.color = color.normal
+    self.color = self.normalColor
 end
 
 function Button:toHover()
     self.isHovered = true
-    self.color = color.hover
+    self.color = self.hoverColor
 end
 
-function Button:new(name, x, y, w, h)
+function Button:new(name, x, y, w, h, normalColor, hoverColor, borderColor, textColor)
     self.name = name
     self.x = x
     self.y = y
     self.w = w
     self.h = h
     self.font = Font.default
+    self.normalColor = normalColor
+    self.hoverColor = hoverColor
+    self.borderColor = borderColor
+    self.textColor = textColor
     self:toNormal()
 end
 

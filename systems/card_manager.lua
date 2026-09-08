@@ -3,10 +3,10 @@ local Manager = {
     cards = {}
 }
 
-function Manager:load(cardData)
+function Manager:load(cardData, textColor)
     self.cards = {}
     for _, cd in ipairs(cardData) do
-        local co = Card(cd)
+        local co = Card(cd, textColor)
         table.insert(self.cards, co)
     end
 end

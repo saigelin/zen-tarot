@@ -51,7 +51,11 @@ end
 
 function Scene:enter(previous)
     self.drawButton:toNormal()
-    AudioMgr:playBGM()
+    if Config:getBGM() then
+        AudioMgr:playBGM()
+    else
+        AudioMgr:stopBGM()
+    end
     self:toIdle()
 end
 

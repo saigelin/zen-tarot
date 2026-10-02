@@ -48,4 +48,8 @@ function Button:mousemoved(x, y)
     end
 end
 
+function Button:setName(name)
+    self.name = name
+end
+
 return Button

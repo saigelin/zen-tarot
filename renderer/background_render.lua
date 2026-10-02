@@ -5,8 +5,8 @@ function Render:draw(background)
         return
     end
     if background.image ~= nil then
-        local screenWidth = 800
-        local screenHeight = 600
+        local screenWidth, screenHeight = love.graphics.getDimensions()
+
         local imageWidth = background.image:getWidth()
         local imageHeight = background.image:getHeight()
         local sx = screenWidth / imageWidth

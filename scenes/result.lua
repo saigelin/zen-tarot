@@ -13,7 +13,11 @@ end
 function Scene:enter(previous, currentCard)
     self.currentCard = currentCard
     self.againButton:toNormal()
-    AudioMgr:playBGM()
+    if Config:getBGM() then
+        AudioMgr:playBGM()
+    else
+        AudioMgr:stopBGM()
+    end
 end
 
 function Scene:update(dt)
